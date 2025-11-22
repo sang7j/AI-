@@ -610,8 +610,11 @@ app.post("/make-server-5a8db632/keywords", async (c) => {
     const body = await c.req.json();
     const { bookId, keyword } = body;
     
-    const user = await getUserFromToken(c.req.header('Authorization'));
-    const userId = user?.id || 'anonymous';
+     const user = await getUserFromToken(c.req.header('Authorization'));
+    if (!user) {
+      return c.json({ success: false, error: "Authentication required" }, 401);
+    }
+    const userId = user.id;
     
     if (!bookId || !keyword) {
       return c.json({ success: false, error: "BookId and keyword are required" }, 400);

@@ -11,8 +11,7 @@ import { Button } from "./ui/button";
 import { searchNaverBooks, createBook } from "../utils/api";
 import { Search } from "lucide-react";
 import { toast } from "sonner@2.0.3";
-import { ImageWithFallback } from './figma/ImageWithFallback';
-
+import { ImageWithFallback } from './common/ImageWithFallback';
 interface NaverBookSearchModalProps {
   open: boolean;
   onClose: () => void;

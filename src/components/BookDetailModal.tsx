@@ -13,7 +13,7 @@ import { getBook, addKeyword, voteKeyword, getMyVotes, deleteBook, updateBook, m
 import { getCurrentUser } from "../utils/supabase/client";
 import { KeywordInput } from "./KeywordInput";
 import { KeywordBadge } from "./KeywordBadge";
-import { ImageWithFallback } from './figma/ImageWithFallback';
+import { ImageWithFallback } from "./common/ImageWithFallback";
 import { AlertDialog } from './AlertDialog';
 import { toast } from "sonner@2.0.3";
 import { Trash2, Edit, Check, X, Sparkles } from "lucide-react";
@@ -88,17 +88,29 @@ export function BookDetailModal({ bookId, open, onClose, onBookDeleted, onBookUp
   };
 
   const handleAddKeyword = async (keyword: string) => {
-    if (!bookId) return;
-    
-    try {
-      const data = await addKeyword(bookId, keyword);
-      toast.success(data.existed ? '키워드에 동의했습니다!' : '새 키워드를 추가했습니다!');
-      await loadBookDetails();
-    } catch (error) {
-      console.error('Error adding keyword:', error);
-      toast.error('키워드 추가에 실패했습니다');
+  if (!bookId) return;
+
+  // 🔹 로그인 여부 확인 (투표랑 똑같이)
+  const user = await getCurrentUser();
+  if (!user) {
+    toast.error('로그인이 필요합니다');
+    if (onAuthRequired) {
+      onAuthRequired(); // -> App에서 AuthModal 띄움
     }
-  };
+    return;
+  }
+
+  try {
+    const data = await addKeyword(bookId, keyword);
+    toast.success(
+      data.existed ? '키워드에 동의했습니다!' : '새 키워드를 추가했습니다!'
+    );
+    await loadBookDetails();
+  } catch (error) {
+    console.error('Error adding keyword:', error);
+    toast.error('키워드 추가에 실패했습니다');
+  }
+};
 
   const handleVote = async (keyword: string, voteType: 'up' | 'down') => {
     if (!bookId) return;

@@ -108,10 +108,14 @@ export async function deleteBook(id: string) {
 }
 
 export async function addKeyword(bookId: string, keyword: string) {
-  return apiCall('/keywords', {
-    method: 'POST',
-    body: JSON.stringify({ bookId, keyword }),
-  });
+  return apiCall(
+    '/keywords',
+    {
+      method: 'POST',
+      body: JSON.stringify({ bookId, keyword }),
+    },
+    true // 🔹 로그인 토큰 사용
+  );
 }
 
 export async function voteKeyword(bookId: string, keyword: string, voteType: 'up' | 'down') {

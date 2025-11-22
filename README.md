@@ -1,11 +1,25 @@
+# AI 기반 감정·추상 키워드 도서 검색
 
-  # AI 기반 감정 추상 키워드 도서 검색
+감정/추상 키워드를 기반으로 책을 기록하고 검색하는 웹 서비스입니다.
 
-  This is a code bundle for AI 기반 감정 추상 키워드 도서 검색. The original project is available at https://www.figma.com/design/WnANec1kJQ1zM6Ir5CNuON/AI-%EA%B8%B0%EB%B0%98-%EA%B0%90%EC%A0%95-%EC%B6%94%EC%83%81-%ED%82%A4%EC%9B%8C%EB%93%9C-%EB%8F%84%EC%84%9C-%EA%B2%80%EC%83%89.
+## 배포 주소
 
-  ## Running the code
+GitHub Pages: https://sang7j.github.io/AI-/
 
-  Run `npm i` to install the dependencies.
+## 주요 기능
 
-  Run `npm run dev` to start the development server.
+- 네이버 책 검색 API 연동
+- 감정/추상 키워드 등록 및 통계
+- 키워드 동의/비동의 투표
+- 로그인(이메일·비밀번호) 기능
+- GitHub Pages + Supabase 배포
+
+## 개발 및 실행
+
+```bash
+npm install
+npm run dev
+# 또는
+npm run build
+npm run preview
   
